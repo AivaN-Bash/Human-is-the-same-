@@ -11,8 +11,8 @@ export type AnimatedTextRollerProps = {
 };
 
 const phraseColors = {
-  blue: '#538BD3',
-  crimson: '#981449',
+  blue: '#A4BDFF',
+  crimson: '#F08DB8',
 } as const;
 
 /** Rotates short, related phrases without moving the surrounding layout. */
