@@ -28,6 +28,8 @@ Push to `main` to build and deploy with GitHub Actions. The Vite base path is co
 - About's calm blue background is built from CSS gradients in `src/styles.css`; its soft lighting respects reduced-motion settings.
 - The hero uses one looping, slow-pan photo at `public/images/hero.jpg`; change its path in `src/data/site.ts`.
 - About details, activity copy, and the volunteer quote are editable in `src/data/site.ts`.
+- The standalone contact page is `contact.html`, with its React entry in `src/contact.tsx`; its email, label, and copy are editable in `src/data/site.ts`.
+- The contact form opens a prefilled email draft in the visitor's email app. Visitors review and send it there; the site does not store or send messages through a server.
 
 ## shadcn/ui
 

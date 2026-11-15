@@ -23,11 +23,13 @@ type NavigationProps = {
 };
 
 function Navigation({ menuOpen, setMenuOpen }: NavigationProps) {
+  const contactHref = assetUrl('contact.html');
   const links = [
     { href: '#about', label: site.about.menu },
     { href: '#origin', label: site.origin.label },
     ...site.activities.map((activity) => ({ href: `#${activity.id}`, label: activity.menu })),
     { href: '#join', label: site.join.menu },
+    { href: contactHref, label: site.contact.menu },
   ];
 
   useEffect(() => {
@@ -37,6 +39,10 @@ function Navigation({ menuOpen, setMenuOpen }: NavigationProps) {
   }, [setMenuOpen]);
 
   function navigate(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith('#')) {
+      setMenuOpen(false);
+      return;
+    }
     event.preventDefault();
     setMenuOpen(false);
     window.setTimeout(() => {
@@ -63,7 +69,7 @@ function Navigation({ menuOpen, setMenuOpen }: NavigationProps) {
       <button className="overlay" aria-label={site.closeLabel} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)} />
       <nav className="menu" id="site-menu" aria-label={site.menuLabel}>
         <div className="layer"/><div className="layer l2"/><div className="layer l3"/><BrandShapes />
-        <ul className="menu-list">{links.map((link, index) => <li key={link.href} data-shape={index % 3}><a href={link.href} tabIndex={menuOpen ? 0 : -1} onClick={(event) => navigate(event, link.href)}>{link.label}</a></li>)}</ul>
+        <ul className="menu-list">{links.map((link, index) => <li key={link.href} data-shape={index % 3}><a href={link.href} style={{ '--item': index } as React.CSSProperties} tabIndex={menuOpen ? 0 : -1} onClick={(event) => navigate(event, link.href)}>{link.label}</a></li>)}</ul>
       </nav>
     </div>
   </>;
@@ -128,7 +134,7 @@ function Activity({ activity, index }: { activity: SiteActivity; index: number }
       <div className="activity-copy reveal"><div className="activity-meta"><span className="tag">{activity.tag}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
         <div className="activity-outcome"><p className="activity-outcome-label">เมื่อจบกิจกรรม ผู้เรียนจะทำได้</p><p>{activity.outcome}</p></div>
         <dl>{activity.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-        {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">ตัวอย่างสิ่งที่สอน</h3><ol className="activity-timeline" aria-label="ตัวอย่างบทเรียนในกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href="#join">อาสาสมัครร่วมสอน<span aria-hidden="true">↗</span></a></li></ol></div>}
+        {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">ตัวอย่างสิ่งที่สอน</h3><ol className="activity-timeline" aria-label="ตัวอย่างบทเรียนในกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href={assetUrl('contact.html')}>สอบถามเรื่องกิจกรรม<span aria-hidden="true">↗</span></a></li></ol></div>}
       </div>
     </div>
   </section>;
@@ -146,6 +152,33 @@ function ActivitiesIntro() {
       </div>
     </div>
   </section>;
+}
+
+const originWritingPath = 'M91 178c42-10 83-3 121 16m-121 7c42-10 83-3 121 16m-121 7c42-10 83-3 121 16m197-62c-42-10-83-3-121 16m121 7c-42-10-83-3-121 16m121 7c-42-10-83-3-121 16';
+
+function OriginIllustration() {
+  return <div className="origin-visual" aria-hidden="true">
+    <svg viewBox="0 0 500 380" role="presentation">
+      <defs>
+        <linearGradient id="origin-book-page" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#fff" />
+          <stop offset="1" stopColor="#DAD8E9" />
+        </linearGradient>
+      </defs>
+      <path d="M248 170C190 129 121 120 58 140v164c63-20 132-11 190 30z" fill="#25344f" fillOpacity=".45" transform="translate(0 10)" />
+      <path d="M252 170c58-41 127-50 190-30v164c-63-20-132-11-190 30z" fill="#25344f" fillOpacity=".45" transform="translate(0 10)" />
+      <g className="origin-book-pages">
+        <path d="M250 166c-59-40-128-48-190-28v164c62-20 131-12 190 29z" fill="url(#origin-book-page)" stroke="#A4BFDF" strokeWidth="2" />
+        <path d="M250 166c59-40 128-48 190-28v164c-62-20-131-12-190 29z" fill="url(#origin-book-page)" stroke="#A4BFDF" strokeWidth="2" />
+        <path d="M250 168v163" fill="none" stroke="#538BD3" strokeOpacity=".6" strokeWidth="2" />
+        <path className="origin-writing-line" d={originWritingPath} pathLength="1" fill="none" stroke="#45577D" strokeOpacity=".34" strokeWidth="3" strokeLinecap="round" />
+      </g>
+      <path d="M112 126c20 7 42 18 59 33m216-32c-20 7-42 18-59 33" fill="none" stroke="#A4BFDF" strokeOpacity=".65" strokeWidth="1.5" strokeDasharray="4 7" />
+      <text className="origin-lesson-mark origin-lesson-left" x="71" y="108" fill="#DAD8E9" fontSize="25" fontWeight="700">ก ข</text>
+      <text className="origin-lesson-mark origin-lesson-right" x="365" y="106" fill="#F08DB8" fontSize="27" fontWeight="700">+ − ×</text>
+      <path d="M127 90l4 8 8 4-8 4-4 8-4-8-8-4 8-4zM350 288l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#A4BFDF" fillOpacity=".85" />
+    </svg>
+  </div>;
 }
 
 type AboutIconName = 'book' | 'bulb' | 'sprout' | 'people';
@@ -213,14 +246,16 @@ function App() {
         </div>
       </section>
       <section id="origin" className="origin-section">
-        <div className="wrap origin-content reveal">
-          <div><p className="kicker">{site.origin.label}</p><h2>{site.origin.title}</h2></div>
-          <p>{site.origin.text}</p>
+        <div className="wrap">
+          <div className="origin-content reveal">
+            <div className="origin-copy"><p className="kicker">{site.origin.label}</p><h2>{site.origin.title}</h2><p>{site.origin.text}</p><a className="origin-link" href="#activities-intro">ดูตัวอย่างกิจกรรม<span aria-hidden="true">↗</span></a></div>
+            <OriginIllustration />
+          </div>
         </div>
       </section>
       <ActivitiesIntro />
       {site.activities.map((activity, index) => <Activity key={activity.id} activity={activity} index={index} />)}
-      <section id="join" className="join-section"><div className="wrap join-card-wrap"><LearningInvitationCard eyebrow={site.name} title={site.join.title} description={site.join.text} actionLabel={site.join.actionLabel} href="#peer" quote={site.join.quote} attribution={site.join.attribution} /></div></section>
+      <section id="join" className="join-section"><div className="wrap join-card-wrap"><LearningInvitationCard eyebrow={site.name} title={site.join.title} description={site.join.text} actionLabel={site.join.actionLabel} href={assetUrl('contact.html')} quote={site.join.quote} attribution={site.join.attribution} /></div></section>
     </main>
     <footer>{site.footer}</footer>
   </>;

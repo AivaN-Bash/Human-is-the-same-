@@ -35,6 +35,7 @@ type SiteContent = {
   origin: { label: string; title: string; text: string };
   activities: SiteActivity[];
   join: { menu: string; label: string; title: string; text: string; actionLabel: string; quote: string; attribution: string };
+  contact: { menu: string; label: string; title: string; text: string; email: string };
   footer: string;
 };
 
@@ -106,9 +107,16 @@ export const site: SiteContent = {
     label: 'ร่วมกับเรา',
     title: 'ร่วมเป็นผู้สอน',
     text: 'ไม่แก่เกินเรียนและความรู้คู่อาชีพเปิดให้ทุกคนร่วมสอน',
-    actionLabel: 'เลือกกิจกรรมที่อยากสอน',
+    actionLabel: 'สอบถามหรือร่วมสอน',
     quote: 'Education is the most powerful weapon which you can use to change the world.',
     attribution: 'Nelson Mandela',
+  },
+  contact: {
+    menu: 'ติดต่อเรา',
+    label: 'พูดคุยกับเรา',
+    title: 'มีคำถามหรือข้อเสนอแนะไหม?',
+    text: 'สอบถามเรื่องกิจกรรม ชวนเราร่วมงาน หรือฝากข้อเสนอแนะผ่านอีเมลได้โดยตรง',
+    email: 'sahapolsmn@gmail.com',
   },
   footer: '© 2026 Human is the same',
 };

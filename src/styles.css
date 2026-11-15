@@ -134,16 +134,71 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
 .activity-action:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:.2rem}
 @media(prefers-reduced-motion:reduce){.activity-timeline:before{transform:scaleY(1)}.activity-timeline li,.activity-copy.is-visible .activity-timeline li{animation:none;opacity:1;transform:none}}
 
-/* Explain the project's starting idea and the practical result of each lesson. */
-.origin-section{padding:clamp(3.5rem,7vw,6rem) 0;background:#f5f4f9}
-.origin-content{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(2rem,7vw,6rem);max-width:1040px}
-.origin-content .kicker{margin:0 0 .65rem;color:var(--primary);font-size:.85rem;font-weight:700;letter-spacing:.04em}
-.origin-content h2{max-width:420px;margin:0;color:#34445f;font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:1.25;letter-spacing:-.025em;text-wrap:balance}
-.origin-content>p{margin:0;padding-left:1.25rem;border-left:2px solid var(--crimson);color:#566583;font-size:1.02rem;line-height:1.9}
+/* Project origin feature panel with a hand-drawn book and lesson marks. */
+.origin-section{padding:clamp(2.5rem,5vw,4.5rem) 0;background:#f5f4f9}
+.origin-content{position:relative;isolation:isolate;display:grid;width:100%;max-width:1100px;min-height:350px;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;gap:clamp(1.5rem,4vw,3.5rem);margin:0 auto;padding:clamp(1.75rem,5.5vw,4.5rem);overflow:hidden;border:1px solid rgba(164,191,223,.2);border-radius:1.6rem;color:#fff;background:radial-gradient(ellipse at 82% 56%,rgba(83,139,211,.2),transparent 44%),radial-gradient(ellipse at 4% 100%,rgba(152,20,73,.2),transparent 40%),linear-gradient(135deg,#34445f 0%,#45577D 60%,#394a68 100%);box-shadow:0 22px 60px rgba(45,59,88,.16)}
+.origin-content:before{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(218,216,233,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(218,216,233,.025) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(90deg,transparent 15%,black 100%);content:""}
+.origin-copy{position:relative;z-index:1;max-width:510px}
+.origin-content .kicker{margin:0 0 .65rem;color:var(--sky);font-size:.85rem;font-weight:700;letter-spacing:.04em}
+.origin-content h2{max-width:480px;margin:0 0 1rem;color:#fff;font-size:clamp(1.9rem,4vw,3rem);line-height:1.22;letter-spacing:-.025em;text-wrap:balance}
+.origin-copy>p:not(.kicker){max-width:480px;margin:0;color:rgba(255,255,255,.8);font-size:.98rem;line-height:1.85}
+.origin-link{display:inline-flex;align-items:center;gap:.65rem;margin-top:1.35rem;padding:.65rem .95rem;border:1px solid rgba(218,216,233,.28);border-radius:999px;color:#fff;background:rgba(255,255,255,.08);font-size:.9rem;font-weight:700;text-decoration:none;transition:transform .3s ease,border-color .3s ease,background-color .3s ease}
+.origin-link span{color:var(--sky);transition:transform .3s ease}.origin-link:hover{transform:translateY(-2px);border-color:rgba(164,191,223,.72);background:rgba(255,255,255,.13)}.origin-link:hover span{transform:translate(2px,-2px)}
+.origin-link:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.origin-visual{position:relative;z-index:0;width:min(100%,500px);aspect-ratio:500/380;justify-self:end}
+.origin-visual svg{display:block;width:100%;height:100%;overflow:visible}
+.origin-writing-line{stroke-dasharray:1;stroke-dashoffset:1}
+.origin-lesson-mark{opacity:.86}
+.origin-content.is-visible .origin-writing-line{animation:origin-lines-write 6s linear infinite}
+@keyframes origin-lines-write{0%{stroke-dashoffset:1}80%{stroke-dashoffset:0}94%{stroke-dashoffset:0}100%{stroke-dashoffset:1}}
 .activity-outcome{margin:.9rem 0 1rem;padding:.7rem .9rem;border-left:3px solid var(--c);border-radius:0 .65rem .65rem 0;background:color-mix(in srgb,var(--c) 8%,white)}
 .activity-outcome-label{margin:0 0 .2rem;color:var(--c)!important;font-size:.76rem;font-weight:750;letter-spacing:.02em}
 .activity-outcome>p:last-child{margin:0;color:#45577d;font-size:.9rem;line-height:1.6}
-@media(max-width:720px){.origin-section{padding:3.5rem 0}.origin-content{grid-template-columns:1fr;gap:1.1rem}.origin-content>p{padding-left:1rem;font-size:.97rem}.activity-outcome{margin:.8rem 0}}
+@media(max-width:720px){.origin-section{padding:2.75rem 0}.origin-content{min-height:0;grid-template-columns:minmax(0,1fr);gap:.5rem;padding:clamp(1.4rem,5vw,2rem);border-radius:1.2rem}.origin-content h2{font-size:clamp(1.8rem,7vw,2.45rem)}.origin-copy>p:not(.kicker){font-size:.93rem;line-height:1.75}.origin-link{margin-top:1rem}.origin-visual{width:min(100%,400px);justify-self:center;margin-top:.15rem}.activity-outcome{margin:.8rem 0}}
+@media(prefers-reduced-motion:reduce){.origin-content.is-visible .origin-writing-line{animation:none}.origin-writing-line{stroke-dashoffset:0}}
+
+/* A direct, usable contact route that fits the site's blue and burgundy palette. */
+.contact-page{position:relative;isolation:isolate;display:flex;min-height:100svh;flex-direction:column;overflow:hidden;background:#f5f4f9}
+.contact-page:before{position:absolute;inset:-18%;z-index:0;background:radial-gradient(ellipse at 8% 10%,rgba(83,139,211,.15),transparent 34%),radial-gradient(ellipse at 94% 92%,rgba(152,20,73,.1),transparent 30%);content:"";pointer-events:none;animation:contact-light-drift 18s ease-in-out infinite alternate}
+.contact-page-header,.contact-page-main,.contact-page>footer{position:relative;z-index:1}
+.contact-page-header{display:flex;width:min(100%,1120px);align-items:center;justify-content:space-between;gap:1rem;margin:0 auto;padding:1.1rem 1.25rem}
+.contact-brand{display:inline-flex;align-items:center;gap:.65rem;color:#34445f;font-size:1rem;font-weight:800;text-decoration:none}
+.contact-brand-mark{display:grid;width:2.35rem;height:2.35rem;place-items:center;border-radius:.75rem;color:#fff;background:var(--primary);box-shadow:0 7px 18px rgba(83,139,211,.22)}
+.contact-brand-mark svg{width:1.45rem;height:1.45rem}
+.contact-back{display:inline-flex;align-items:center;gap:.45rem;color:#45577d;font-size:.92rem;font-weight:700;text-decoration:none;transition:color .2s ease,transform .2s ease}
+.contact-back:hover{transform:translateX(-2px);color:var(--primary)}
+.contact-page-main{display:flex;width:100%;flex:1;align-items:center;justify-content:center;padding:clamp(2.5rem,6vw,5.5rem) 0}
+.contact-page-content{width:100%;min-width:0}
+.contact-page section{padding:0}
+.contact-layout{display:grid;width:min(100%,1080px);grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:clamp(2.5rem,7vw,6rem);max-width:1080px;margin-inline:auto}
+.contact-copy .kicker{margin:0 0 .7rem;color:var(--primary);font-size:.86rem}
+.contact-copy h1{max-width:430px;margin:0 0 1rem;color:#34445f;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.2;letter-spacing:-.03em;text-wrap:balance}
+.contact-description{max-width:430px;color:#5e6c85;line-height:1.8}
+.contact-email{display:inline-flex;max-width:100%;align-items:center;gap:.7rem;margin-top:1.5rem;padding:.7rem .9rem;border:1px solid rgba(69,87,125,.17);border-radius:.85rem;color:#45577d;background:rgba(255,255,255,.7);font-weight:700;text-decoration:none;transition:transform .3s ease,border-color .3s ease,background-color .3s ease}
+.contact-email svg{width:1.15rem;height:1.15rem;flex:none;color:var(--primary)}.contact-email-arrow{color:var(--crimson);transition:transform .3s ease}.contact-email:hover{transform:translateY(-2px);border-color:rgba(83,139,211,.55);background:#fff}.contact-email:hover .contact-email-arrow{transform:translate(2px,-2px)}
+.contact-form{padding:clamp(1.25rem,3vw,2rem);border:1px solid rgba(69,87,125,.12);border-radius:1.25rem;background:rgba(255,255,255,.88);box-shadow:0 20px 55px rgba(45,59,88,.1)}
+.contact-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.contact-field{display:grid;min-width:0;gap:.35rem;color:#45577d;font-size:.87rem;font-weight:700}
+.contact-field-wide{grid-column:1/-1}
+.contact-field input,.contact-field select,.contact-field textarea{width:100%;min-width:0;border:1px solid rgba(69,87,125,.2);border-radius:.65rem;padding:.72rem .8rem;color:#34445f;background:#fff;font:inherit;font-size:.95rem;font-weight:450;line-height:1.5;transition:border-color .2s ease,box-shadow .2s ease}
+.contact-field textarea{min-height:7.5rem;resize:vertical}
+.contact-field input::placeholder,.contact-field textarea::placeholder{color:#8a94a8}
+.contact-field input:focus-visible,.contact-field select:focus-visible,.contact-field textarea:focus-visible{outline:0;border-color:var(--primary);box-shadow:0 0 0 3px rgba(83,139,211,.18)}
+.contact-form-footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem}
+.contact-form-note{max-width:290px;color:#65738c;font-size:.8rem;line-height:1.55}
+.contact-submit{display:inline-flex;flex:none;align-items:center;gap:.65rem;border:0;border-radius:999px;padding:.75rem 1rem;color:#fff;background:var(--primary);font:inherit;font-size:.9rem;font-weight:750;cursor:pointer;box-shadow:0 8px 20px rgba(83,139,211,.2);transition:transform .3s ease,background-color .3s ease,box-shadow .3s ease}
+.contact-submit span{transition:transform .3s ease}.contact-submit:hover{transform:translateY(-2px);background:#467cc0;box-shadow:0 12px 25px rgba(83,139,211,.28)}.contact-submit:hover span{transform:translate(2px,-2px)}
+.contact-submit:focus-visible{outline:3px solid var(--crimson);outline-offset:3px}
+.contact-status{min-height:1.4rem;margin:.6rem 0 0;color:#45577d;font-size:.82rem;line-height:1.5}
+.menu-list{overflow-y:auto;overscroll-behavior:contain}
+@keyframes contact-page-enter{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes contact-light-drift{from{transform:translate3d(-2%,-1%,0) scale(.96)}to{transform:translate3d(2%,1%,0) scale(1.04)}}
+.contact-copy-enter{animation:contact-page-enter .75s cubic-bezier(.22,1,.36,1) both}
+.contact-form-enter{animation:contact-page-enter .8s .12s cubic-bezier(.22,1,.36,1) both}
+@media(max-width:760px){.contact-page-header{padding:.85rem 1rem}.contact-page-main{align-items:flex-start;padding:clamp(1.5rem,5vw,2.5rem) 0 3rem}.contact-layout{grid-template-columns:minmax(0,1fr);gap:1.5rem}.contact-copy h1{font-size:clamp(1.9rem,8vw,2.6rem)}.contact-form{padding:1.15rem;border-radius:1rem}}
+@media(max-width:640px){.contact-fields{grid-template-columns:minmax(0,1fr);gap:.85rem}.contact-field-wide{grid-column:auto}.contact-form-footer{align-items:flex-start;flex-direction:column}.contact-submit{align-self:flex-start}.contact-field input,.contact-field select,.contact-field textarea{font-size:16px}}
+@media(max-width:420px){.contact-page-header{gap:.5rem;padding:.75rem}.contact-brand{gap:.5rem;font-size:.9rem}.contact-brand-mark{width:2rem;height:2rem;border-radius:.65rem}.contact-brand-mark svg{width:1.25rem;height:1.25rem}.contact-back{gap:.25rem;font-size:.8rem}.contact-copy h1{font-size:clamp(1.8rem,9vw,2.25rem)}.contact-email{gap:.5rem;padding:.65rem .7rem;font-size:.86rem}.contact-form{padding:1rem}}
+@media(prefers-reduced-motion:reduce){.contact-page:before{animation:none}.contact-copy-enter,.contact-form-enter{animation:none;opacity:1;transform:none}}
 
 /* Reveal the quote as real text so it stays legible and complete on every loop. */
 .invitation-quote{display:flex;min-height:0;gap:1.1rem;justify-content:center;width:min(100%,440px);padding:1rem 0 1.8rem;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;animation:none}
