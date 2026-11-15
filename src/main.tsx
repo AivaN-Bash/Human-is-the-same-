@@ -25,6 +25,7 @@ type NavigationProps = {
 function Navigation({ menuOpen, setMenuOpen }: NavigationProps) {
   const links = [
     { href: '#about', label: site.about.menu },
+    { href: '#origin', label: site.origin.label },
     ...site.activities.map((activity) => ({ href: `#${activity.id}`, label: activity.menu })),
     { href: '#join', label: site.join.menu },
   ];
@@ -125,8 +126,9 @@ function Activity({ activity, index }: { activity: SiteActivity; index: number }
   return <section id={activity.id} className={`act ${index % 2 ? 'flip activity-alt' : ''}`} style={{ '--c': activity.color } as React.CSSProperties} aria-labelledby={`${activity.id}-title`}>
     <div className="wrap grid"><div className="ph reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /></div>
       <div className="activity-copy reveal"><div className="activity-meta"><span className="tag">{activity.tag}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
+        <div className="activity-outcome"><p className="activity-outcome-label">เมื่อจบกิจกรรม ผู้เรียนจะทำได้</p><p>{activity.outcome}</p></div>
         <dl>{activity.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-        {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">หัวข้อการเรียนรู้</h3><ol className="activity-timeline" aria-label="หัวข้อกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href="#join">อาสาสมัครร่วมสอน<span aria-hidden="true">↗</span></a></li></ol></div>}
+        {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">ตัวอย่างสิ่งที่สอน</h3><ol className="activity-timeline" aria-label="ตัวอย่างบทเรียนในกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href="#join">อาสาสมัครร่วมสอน<span aria-hidden="true">↗</span></a></li></ol></div>}
       </div>
     </div>
   </section>;
@@ -208,6 +210,12 @@ function App() {
         <div className="about-ambient" aria-hidden="true"><img className="about-photo" src={assetUrl('/images/school.jpg')} alt=""/><span className="ambient-orb ambient-orb-blue"/><span className="ambient-orb ambient-orb-red"/><span className="ambient-grain"/></div>
         <div className="wrap reveal about-content"><div className="about-heading"><p className="kicker">{site.about.label}</p><h2><TypewriterText text={site.about.title} /></h2><p className="lead">{site.about.text}</p><AnimatedTextRoller lead="เราเชื่อว่า" phrases={site.about.movingPhrases} /></div>
           <ul className="about-details">{site.about.details.map((detail) => <li key={detail.title}><span className="about-detail-icon"><AboutIcon name={detail.icon} /></span><div><h3>{detail.title}</h3><p>{detail.text}</p></div></li>)}</ul>
+        </div>
+      </section>
+      <section id="origin" className="origin-section">
+        <div className="wrap origin-content reveal">
+          <div><p className="kicker">{site.origin.label}</p><h2>{site.origin.title}</h2></div>
+          <p>{site.origin.text}</p>
         </div>
       </section>
       <ActivitiesIntro />

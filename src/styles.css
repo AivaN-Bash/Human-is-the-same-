@@ -134,6 +134,17 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
 .activity-action:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:.2rem}
 @media(prefers-reduced-motion:reduce){.activity-timeline:before{transform:scaleY(1)}.activity-timeline li,.activity-copy.is-visible .activity-timeline li{animation:none;opacity:1;transform:none}}
 
+/* Explain the project's starting idea and the practical result of each lesson. */
+.origin-section{padding:clamp(3.5rem,7vw,6rem) 0;background:#f5f4f9}
+.origin-content{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(2rem,7vw,6rem);max-width:1040px}
+.origin-content .kicker{margin:0 0 .65rem;color:var(--primary);font-size:.85rem;font-weight:700;letter-spacing:.04em}
+.origin-content h2{max-width:420px;margin:0;color:#34445f;font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:1.25;letter-spacing:-.025em;text-wrap:balance}
+.origin-content>p{margin:0;padding-left:1.25rem;border-left:2px solid var(--crimson);color:#566583;font-size:1.02rem;line-height:1.9}
+.activity-outcome{margin:.9rem 0 1rem;padding:.7rem .9rem;border-left:3px solid var(--c);border-radius:0 .65rem .65rem 0;background:color-mix(in srgb,var(--c) 8%,white)}
+.activity-outcome-label{margin:0 0 .2rem;color:var(--c)!important;font-size:.76rem;font-weight:750;letter-spacing:.02em}
+.activity-outcome>p:last-child{margin:0;color:#45577d;font-size:.9rem;line-height:1.6}
+@media(max-width:720px){.origin-section{padding:3.5rem 0}.origin-content{grid-template-columns:1fr;gap:1.1rem}.origin-content>p{padding-left:1rem;font-size:.97rem}.activity-outcome{margin:.8rem 0}}
+
 /* Reveal the quote as real text so it stays legible and complete on every loop. */
 .invitation-quote{display:flex;min-height:0;gap:1.1rem;justify-content:center;width:min(100%,440px);padding:1rem 0 1.8rem;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;animation:none}
 .invitation-quote blockquote{position:relative;z-index:1;margin:0}
