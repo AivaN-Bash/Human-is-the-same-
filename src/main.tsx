@@ -128,10 +128,26 @@ function HeroTicker() {
   </div>;
 }
 
+function ReadingProgress({ progress }: { progress: number }) {
+  return <div
+    className="reading-progress"
+    role="progressbar"
+    aria-label="ความคืบหน้าการอ่าน"
+    aria-valuemin={0}
+    aria-valuemax={100}
+    aria-valuenow={Math.round(progress)}
+  >
+    <span style={{ transform: `scaleX(${progress / 100})` }} />
+  </div>;
+}
+
 function Activity({ activity, index }: { activity: SiteActivity; index: number }) {
+  const pageNumber = String(index + 1).padStart(2, '0');
+
   return <section id={activity.id} className={`act ${index % 2 ? 'flip activity-alt' : ''}`} style={{ '--c': activity.color } as React.CSSProperties} aria-labelledby={`${activity.id}-title`}>
-    <div className="wrap grid"><div className="ph reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /></div>
-      <div className="activity-copy reveal"><div className="activity-meta"><span className="tag">{activity.tag}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
+    <div className="wrap book-wrap"><article className="book-spread">
+      <figure className="book-photo reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /><figcaption className="book-photo-caption">{activity.audience}</figcaption></figure>
+      <div className="book-page activity-copy reveal"><div className="activity-meta"><span className="tag">บทที่ {pageNumber}</span><span className="book-page-label">HUMAN IS THE SAME <span aria-hidden="true">·</span> {pageNumber}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
         <dl className="activity-purpose-grid">
           <div><dt>วัตถุประสงค์</dt><dd>{activity.purpose}</dd></div>
           <div><dt>แนวทางดำเนินงาน</dt><dd>{activity.approach}</dd></div>
@@ -141,7 +157,7 @@ function Activity({ activity, index }: { activity: SiteActivity; index: number }
         <dl>{activity.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">ตัวอย่างสิ่งที่สอน</h3><ol className="activity-timeline" aria-label="ตัวอย่างบทเรียนในกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href={assetUrl('contact.html')}>สอบถามเรื่องกิจกรรม<span aria-hidden="true">↗</span></a></li></ol></div>}
       </div>
-    </div>
+    </article></div>
   </section>;
 }
 
@@ -154,10 +170,10 @@ function ParticipationSteps() {
         <p>ทั้งสองโครงการใช้กระบวนการร่วมกันตั้งแต่สำรวจความต้องการ จัดกิจกรรม จนถึงติดตามผล เพื่อให้ความรู้กลายเป็นคุณค่าที่ยั่งยืน</p>
       </div>
       <ol className="participation-steps">
-        {site.activities.map((activity, index) => <li key={activity.id}>
-          <span className="participation-project">โครงการ {index + 1}</span>
+        {site.activities.map((activity) => <li key={activity.id} style={{ '--c': activity.color } as React.CSSProperties}>
+          <span className="participation-project">{activity.audience}</span>
           <h3>{activity.title}</h3>
-          <div className="participation-step-list">{activity.steps.map((step, stepIndex) => <div key={step.title}><span>{stepIndex + 1}</span><p><strong>{step.title}</strong>{step.description}</p></div>)}</div>
+          <div className="participation-step-list">{activity.steps.map((step) => <div key={step.title}><p><strong>{step.title}</strong>{step.description}</p></div>)}</div>
         </li>)}
       </ol>
     </div>
@@ -167,9 +183,20 @@ function ParticipationSteps() {
 function ActivitiesIntro() {
   return <section id="activities-intro" className="activities-intro">
     <div className="wrap activities-intro-content reveal">
-      <p className="kicker">กิจกรรมของเรา</p>
+      <p className="kicker">เริ่มต้นจากสิ่งที่คุณอยากเรียนรู้</p>
       <h2 className="marker-heading"><span className="marker-highlight">ความรู้ที่ส่งต่อได้</span><br className="desktop-break" />{' '}<span className="marker-highlight">เริ่มจากเรื่องใกล้ตัว</span></h2>
-      <p className="lead">จากบทเรียนพื้นฐานไปจนถึงทักษะอาชีพ ทุกคนมีสิ่งที่แบ่งปันและเรียนรู้ร่วมกันได้</p>
+      <p className="lead">เลือกโครงการที่ตรงกับเป้าหมาย เพื่อดูเนื้อหา แนวทาง และประโยชน์ที่ชุมชนจะได้รับ</p>
+      <nav className="project-directory" aria-label="เลือกโครงการ">
+        {site.activities.map((activity) => <a className="project-entry" href={`#${activity.id}`} key={activity.id} style={{ '--c': activity.color } as React.CSSProperties}>
+          <span className="project-entry-content">
+            <span className="project-entry-audience">{activity.audience}</span>
+            <span className="project-entry-title">{activity.title}</span>
+            <span className="project-entry-summary">{activity.text}</span>
+            <span className="project-entry-topics">{activity.topics.slice(0, 2).map((topic) => <span key={topic.title}>{topic.title}</span>)}</span>
+            <span className="project-entry-action">อ่านรายละเอียดโครงการ <span aria-hidden="true">↗</span></span>
+          </span>
+        </a>)}
+      </nav>
       <div className="activity-summary" aria-label="รูปแบบกิจกรรม">
         <span>ออกแบบตามวัยและบริบทของชุมชน</span>
         <span>ทุกวัย <i aria-hidden="true">·</i> ทุกพื้นที่</span>
@@ -220,13 +247,20 @@ function AboutIcon({ name }: { name: AboutIconName }) {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [readProgress, setReadProgress] = useState(0);
 
   useEffect(() => {
-    document.title = site.name;
-    const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
-    }), { rootMargin: '0px 0px -12% 0px' });
-    document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+    document.title = `${site.name} | ${site.hero.eyebrow}`;
+    let revealObserver: IntersectionObserver | undefined;
+    const revealElements = [...document.querySelectorAll('.reveal')];
+    if ('IntersectionObserver' in window) {
+      revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver?.unobserve(entry.target); }
+      }), { rootMargin: '0px 0px -12% 0px' });
+      revealElements.forEach((element) => revealObserver?.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add('is-visible'));
+    }
     const menuItems = [...document.querySelectorAll<HTMLLIElement>('.menu-list li')];
     const shapes = [...document.querySelectorAll('.shape')];
     const menuHandlers = menuItems.map((item) => {
@@ -241,9 +275,12 @@ function App() {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let scrollFrame = 0;
     const updateParallax = () => {
-      if (motionPreference.matches || scrollFrame) return;
+      if (scrollFrame) return;
       scrollFrame = requestAnimationFrame(() => {
         scrollFrame = 0;
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        setReadProgress(scrollableHeight > 0 ? Math.min(100, Math.max(0, window.scrollY / scrollableHeight * 100)) : 0);
+        if (motionPreference.matches) return;
         const layers = document.querySelector('[data-layers]');
         const hero = document.querySelector<HTMLElement>('.hero');
         if (!layers || !hero) return;
@@ -255,10 +292,12 @@ function App() {
       });
     };
     window.addEventListener('scroll', updateParallax, { passive: true });
-    return () => { window.removeEventListener('scroll', updateParallax); revealObserver.disconnect(); menuHandlers.forEach((cleanup) => cleanup()); cancelAnimationFrame(scrollFrame); };
+    updateParallax();
+    return () => { window.removeEventListener('scroll', updateParallax); revealObserver?.disconnect(); menuHandlers.forEach((cleanup) => cleanup()); cancelAnimationFrame(scrollFrame); };
   }, []);
 
   return <>
+    <ReadingProgress progress={readProgress} />
     <Navigation menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Hero />
     <HeroTicker />

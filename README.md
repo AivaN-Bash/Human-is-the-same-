@@ -10,6 +10,7 @@ npm run dev
 ```
 
 Open the local URL printed by Vite. Run `npm run build` to create a production build in `dist/`.
+Run `npm run check` before publishing to type-check the project and build both pages.
 
 ## Deploy on GitHub Pages
 
