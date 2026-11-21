@@ -161,6 +161,183 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
   .participation-section{padding:4.5rem 0}
 }
 
+/* Book-like project spread */
+.act{overflow:hidden}
+.act .grid{
+  overflow:visible;
+  border:0;
+  border-radius:.35rem;
+  background:#fff;
+  box-shadow:
+    0 26px 70px rgba(45,59,88,.16),
+    0 2px 0 #d6d7df,
+    0 5px 0 #ebeaf0,
+    0 8px 0 #c9ccd7;
+}
+.act .grid:before{
+  z-index:4;
+  inset:-10px 50% -10px auto;
+  width:18px;
+  height:auto;
+  background:linear-gradient(90deg,
+    rgba(40,48,70,.14) 0,
+    rgba(255,255,255,.75) 38%,
+    rgba(70,78,105,.12) 65%,
+    transparent 100%);
+  filter:blur(.2px);
+  pointer-events:none;
+}
+.act.flip .grid:before{
+  right:auto;
+  left:50%;
+  transform:scaleX(-1);
+}
+.act .ph{
+  position:relative;
+  z-index:1;
+  margin:.55rem 0 .55rem .55rem;
+  overflow:hidden;
+  border-radius:.18rem .75rem .75rem .18rem;
+  background:#45577D;
+  box-shadow:-8px 10px 26px rgba(45,59,88,.18);
+}
+.act.flip .ph{
+  margin:.55rem .55rem .55rem 0;
+  border-radius:.75rem .18rem .18rem .75rem;
+  box-shadow:8px 10px 26px rgba(45,59,88,.18);
+}
+.act .ph:after{
+  inset:.8rem;
+  border:1px solid rgba(255,255,255,.62);
+  border-radius:.18rem;
+  box-shadow:inset 0 0 28px rgba(26,35,55,.12);
+}
+.act .ph img{
+  filter:saturate(.82) contrast(.96);
+}
+.activity-copy{
+  position:relative;
+  z-index:2;
+  min-height:100%;
+  padding:clamp(2rem,4.2vw,3.8rem);
+  background:
+    linear-gradient(90deg,rgba(69,87,125,.045) 1px,transparent 1px) 1.8rem 0/1.8rem 100%,
+    linear-gradient(180deg,transparent 0 2.2rem,rgba(83,139,211,.065) 2.2rem 2.24rem) 0 0/100% 2.24rem,
+    #fffdf9;
+}
+.activity-copy:before{
+  position:absolute;
+  right:1.1rem;
+  bottom:-.02rem;
+  width:2.4rem;
+  height:2.4rem;
+  border-top:1px solid rgba(69,87,125,.16);
+  border-left:1px solid rgba(69,87,125,.12);
+  background:linear-gradient(135deg,#ebe9e2 0 49%,#fffdf9 50%);
+  content:"";
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+  filter:drop-shadow(-3px -3px 4px rgba(69,87,125,.06));
+}
+.activity-copy .tag{
+  border-radius:.18rem .18rem .18rem 0;
+  box-shadow:3px 3px 0 color-mix(in srgb,var(--c) 24%,#d8d6df);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.activity-copy h2{
+  max-width:520px;
+  color:#34445f;
+  text-wrap:balance;
+}
+.activity-description{
+  padding-bottom:.8rem;
+  border-bottom:1px solid rgba(69,87,125,.12);
+  color:#65738c;
+}
+.activity-purpose-grid>div{
+  grid-template-columns:8.2rem minmax(0,1fr);
+  padding:.55rem .7rem;
+  border-left:3px solid var(--c);
+  border-radius:0;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 7%,#fff) 0,transparent 100%);
+}
+.activity-purpose-grid dd{
+  color:#526179;
+}
+.activity-outcome{
+  border-left-width:4px;
+  border-radius:0;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c) 9%,#fff),transparent);
+}
+.act dl:not(.activity-purpose-grid)>div{
+  border-radius:0;
+  border-left:2px solid rgba(69,87,125,.24);
+  background:transparent;
+}
+.activity-timeline-wrap{
+  border-top:1px solid rgba(69,87,125,.14);
+}
+.activity-timeline-dot{
+  border-radius:.12rem;
+  transform:rotate(45deg);
+  box-shadow:0 0 0 3px #fffdf9;
+}
+.activity-timeline li:first-child .activity-timeline-dot{
+  border-radius:50%;
+  transform:none;
+}
+@media(max-width:760px){
+  .act .grid{
+    grid-template-columns:minmax(0,1fr);
+    margin-inline:.15rem;
+    box-shadow:
+      0 18px 44px rgba(45,59,88,.14),
+      0 2px 0 #d6d7df,
+      0 5px 0 #ebeaf0,
+      0 7px 0 #c9ccd7;
+  }
+  .act .grid:before{
+    display:none;
+  }
+  .act .ph,
+  .act.flip .ph{
+    height:clamp(220px,64vw,330px);
+    margin:.45rem .45rem 0;
+    border-radius:.18rem .18rem .55rem .55rem;
+    box-shadow:0 10px 24px rgba(45,59,88,.12);
+  }
+  .act.flip .ph{order:0}
+  .act .ph img{
+    height:100%;
+    min-height:0;
+  }
+  .activity-copy{
+    min-height:0;
+    padding:1.35rem 1.15rem 1.55rem;
+    background:
+      linear-gradient(90deg,rgba(69,87,125,.04) 1px,transparent 1px) 1.15rem 0/1.8rem 100%,
+      #fffdf9;
+  }
+  .activity-copy:before{
+    right:.7rem;
+    width:1.8rem;
+    height:1.8rem;
+  }
+  .activity-copy h2{
+    font-size:clamp(1.75rem,8vw,2.35rem);
+  }
+  .activity-purpose-grid>div{
+    grid-template-columns:1fr;
+    gap:.12rem;
+  }
+  .activity-description,
+  .activity-purpose-grid dd,
+  .activity-outcome>p:last-child,
+  .activity-timeline p{
+    line-height:1.6;
+  }
+}
+
 /* Project origin feature panel with a hand-drawn book and lesson marks. */
 .origin-section{padding:clamp(2.5rem,5vw,4.5rem) 0;background:#f5f4f9}
 .origin-content{position:relative;isolation:isolate;display:grid;width:100%;max-width:1100px;min-height:350px;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;gap:clamp(1.5rem,4vw,3.5rem);margin:0 auto;padding:clamp(1.75rem,5.5vw,4.5rem);overflow:hidden;border:1px solid rgba(164,191,223,.2);border-radius:1.6rem;color:#fff;background:radial-gradient(ellipse at 82% 56%,rgba(83,139,211,.2),transparent 44%),radial-gradient(ellipse at 4% 100%,rgba(152,20,73,.2),transparent 40%),linear-gradient(135deg,#34445f 0%,#45577D 60%,#394a68 100%);box-shadow:0 22px 60px rgba(45,59,88,.16)}
