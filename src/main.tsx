@@ -146,7 +146,7 @@ function Activity({ activity, index }: { activity: SiteActivity; index: number }
 
   return <section id={activity.id} className={`act ${index % 2 ? 'flip activity-alt' : ''}`} style={{ '--c': activity.color } as React.CSSProperties} aria-labelledby={`${activity.id}-title`}>
     <div className="wrap book-wrap"><article className="book-spread">
-      <figure className="book-photo reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /><figcaption className="book-photo-caption">{activity.audience}</figcaption></figure>
+      <figure className="book-photo reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /><figcaption className="book-photo-caption">{activity.imageCaption}</figcaption></figure>
       <div className="book-page activity-copy reveal"><div className="activity-meta"><span className="tag">บทที่ {pageNumber}</span><span className="book-page-label">HUMAN IS THE SAME <span aria-hidden="true">·</span> {pageNumber}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
         <dl className="activity-purpose-grid">
           <div><dt>วัตถุประสงค์</dt><dd>{activity.purpose}</dd></div>
@@ -198,8 +198,8 @@ function ActivitiesIntro() {
         </a>)}
       </nav>
       <div className="activity-summary" aria-label="รูปแบบกิจกรรม">
-        <span>ออกแบบตามวัยและบริบทของชุมชน</span>
-        <span>ทุกวัย <i aria-hidden="true">·</i> ทุกพื้นที่</span>
+        <span>ออกแบบให้เหมาะกับผู้ใหญ่และผู้สูงอายุ</span>
+        <span>ทุกชุมชน <i aria-hidden="true">·</i> ทุกพื้นที่</span>
       </div>
     </div>
   </section>;
@@ -303,7 +303,7 @@ function App() {
     <HeroTicker />
     <main>
       <section id="about" className="about-section">
-        <div className="about-ambient" aria-hidden="true"><img className="about-photo" src={assetUrl('/images/school.jpg')} alt=""/><span className="ambient-orb ambient-orb-blue"/><span className="ambient-orb ambient-orb-red"/><span className="ambient-grain"/></div>
+        <div className="about-ambient" aria-hidden="true"><img className="about-photo" src={assetUrl('/images/adult-reading.jpg')} alt=""/><span className="ambient-orb ambient-orb-blue"/><span className="ambient-orb ambient-orb-red"/><span className="ambient-grain"/></div>
         <div className="wrap reveal about-content"><div className="about-heading"><p className="kicker">{site.about.label}</p><h2><TypewriterText text={site.about.title} /></h2><p className="lead">{site.about.text}</p><AnimatedTextRoller lead="เราเชื่อว่า" phrases={site.about.movingPhrases} /></div>
           <ul className="about-details">{site.about.details.map((detail) => <li key={detail.title}><span className="about-detail-icon"><AboutIcon name={detail.icon} /></span><div><h3>{detail.title}</h3><p>{detail.text}</p></div></li>)}</ul>
         </div>

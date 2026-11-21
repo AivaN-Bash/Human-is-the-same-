@@ -421,7 +421,7 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
 @keyframes typewriter-cursor-blink{50%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.typewriter-cursor{animation:none}}
 
-/* A sparse, slow particle drift over the classroom image. */
+/* A sparse, slow particle drift over the adult learning photo. */
 .hero-particles{pointer-events:none}
 .hero-particles span{position:absolute;top:var(--particle-y);left:var(--particle-x);width:var(--particle-size);height:var(--particle-size);border-radius:50%;background:var(--particle-color);opacity:.15;box-shadow:0 0 9px rgba(218,216,233,.8);animation:hero-particle-fall var(--particle-duration) linear var(--particle-delay) infinite;will-change:transform,opacity}
 .hero-particles span:nth-child(5n){box-shadow:0 0 13px rgba(218,216,233,.95)}

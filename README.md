@@ -27,7 +27,7 @@ Push to `main` to build and deploy with GitHub Actions. The Vite base path is co
 - `src/components/ui/learning-invitation-card.tsx` contains the volunteer card and animated education quote; its content comes from `src/data/site.ts`.
 - The volunteer quote reveals as text in a repeating, reduced-motion-aware animation.
 - About's calm blue background is built from CSS gradients in `src/styles.css`; its soft lighting respects reduced-motion settings.
-- The hero uses one looping, slow-pan photo at `public/images/hero.jpg`; change its path in `src/data/site.ts`.
+- The hero uses one looping, slow-pan adult literacy photo at `public/images/adult-literacy.jpg`; change its path in `src/data/site.ts`.
 - About details, activity copy, and the volunteer quote are editable in `src/data/site.ts`.
 - The standalone contact page is `contact.html`, with its React entry in `src/contact.tsx`; its email, label, and copy are editable in `src/data/site.ts`.
 - The contact form opens a prefilled email draft in the visitor's email app. Visitors review and send it there; the site does not store or send messages through a server.
@@ -40,8 +40,7 @@ For a new Vite project, run `npx shadcn@latest init -t vite`, then install Tailw
 
 ## Photo credits
 
-- Classroom: [Fajar Herlambang Studio](https://unsplash.com/photos/students-in-white-uniforms-sitting-at-desks-in-classroom-SZW4OQA_lME)
-- Peer learning: [Ruslan Horovyi](https://unsplash.com/photos/two-young-students-drawing-together-in-a-classroom-ycuGtOTAtuU)
-- Tutoring: [Vitaly Gariev](https://unsplash.com/photos/teacher-helping-young-student-with-math-problems-at-desk-wr2OzAO5fpc)
-- Adult learning: [The New York Public Library](https://unsplash.com/photos/a-black-and-white-photo-of-a-woman-reading-a-book-lp3366axla4)
+- Adult literacy illustration: [The New York Public Library](https://unsplash.com/photos/a-black-and-white-photo-of-a-woman-reading-a-book-lp3366axla4)
+- Adult reading illustration: [Vitaly Gariev](https://unsplash.com/photos/elderly-woman-reading-a-book-on-a-couch-zuLrqcc4Hu0)
+- Thai community market illustration: [Kelvin Zyteng](https://unsplash.com/photos/woman-preparing-food-on-market-boat-7_l8HaQ3N1k)
 
