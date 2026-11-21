@@ -72,6 +72,8 @@ function ContactPage() {
                 <span>หัวข้อ</span>
                 <select id="contact-topic" name="topic" defaultValue="สอบถามกิจกรรม">
                   <option>สอบถามกิจกรรม</option>
+                  <option>โครงการไม่แก่เกินเรียน</option>
+                  <option>โครงการความรู้คู่อาชีพ</option>
                   <option>ร่วมเป็นอาสาสมัคร</option>
                   <option>ข้อเสนอแนะ</option>
                   <option>อื่น ๆ</option>

@@ -134,6 +134,33 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
 .activity-action:focus-visible{outline:3px solid var(--navy);outline-offset:3px;border-radius:.2rem}
 @media(prefers-reduced-motion:reduce){.activity-timeline:before{transform:scaleY(1)}.activity-timeline li,.activity-copy.is-visible .activity-timeline li{animation:none;opacity:1;transform:none}}
 
+/* Project purpose, community benefit, and participation flow. */
+.activity-purpose-grid{display:grid;grid-template-columns:1fr;margin:.9rem 0 1rem;padding:.2rem 0}
+.activity-purpose-grid>div{display:grid;grid-template-columns:8.5rem minmax(0,1fr);align-items:start;gap:.65rem;padding:.48rem .7rem;border-left:2px solid color-mix(in srgb,var(--c) 55%,white);border-radius:0 .55rem .55rem 0;background:rgba(218,216,233,.18)}
+.activity-purpose-grid dt{color:var(--c);font-size:.78rem}
+.activity-purpose-grid dd{color:#566583;font-size:.84rem;line-height:1.55}
+.participation-section{padding:clamp(4.5rem,8vw,7rem) 0;background:#34445f;color:#fff}
+.participation-content{display:grid;grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.participation-heading{position:sticky;top:7rem}
+.participation-heading .kicker{color:var(--sky)}
+.participation-heading h2{color:#fff;font-size:clamp(2rem,4vw,3.2rem);text-wrap:balance}
+.participation-heading>p:last-child{color:rgba(255,255,255,.75)}
+.participation-steps{display:grid;gap:1rem;margin:0;padding:0;list-style:none}
+.participation-steps>li{padding:1.35rem;border:1px solid rgba(218,216,233,.18);border-radius:1.1rem;background:rgba(255,255,255,.07);box-shadow:0 14px 35px rgba(20,29,47,.12)}
+.participation-project{color:var(--sky);font:700 .72rem/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+.participation-steps h3{margin:.35rem 0 1rem;color:#fff;font-size:1.35rem}
+.participation-step-list{display:grid;gap:.7rem}
+.participation-step-list>div{display:grid;grid-template-columns:1.8rem minmax(0,1fr);gap:.7rem;align-items:start}
+.participation-step-list>div>span{display:grid;width:1.8rem;height:1.8rem;place-items:center;border:1px solid rgba(218,216,233,.38);border-radius:50%;color:var(--sky);font-size:.75rem;font-weight:800}
+.participation-step-list p{color:rgba(255,255,255,.72);font-size:.88rem;line-height:1.55}
+.participation-step-list strong{display:block;margin-bottom:.05rem;color:#fff;font-size:.92rem}
+@media(max-width:760px){
+  .activity-purpose-grid>div{grid-template-columns:1fr;gap:.15rem}
+  .participation-content{grid-template-columns:1fr}
+  .participation-heading{position:static}
+  .participation-section{padding:4.5rem 0}
+}
+
 /* Project origin feature panel with a hand-drawn book and lesson marks. */
 .origin-section{padding:clamp(2.5rem,5vw,4.5rem) 0;background:#f5f4f9}
 .origin-content{position:relative;isolation:isolate;display:grid;width:100%;max-width:1100px;min-height:350px;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;gap:clamp(1.5rem,4vw,3.5rem);margin:0 auto;padding:clamp(1.75rem,5.5vw,4.5rem);overflow:hidden;border:1px solid rgba(164,191,223,.2);border-radius:1.6rem;color:#fff;background:radial-gradient(ellipse at 82% 56%,rgba(83,139,211,.2),transparent 44%),radial-gradient(ellipse at 4% 100%,rgba(152,20,73,.2),transparent 40%),linear-gradient(135deg,#34445f 0%,#45577D 60%,#394a68 100%);box-shadow:0 22px 60px rgba(45,59,88,.16)}
@@ -204,7 +231,7 @@ footer{text-align:center;padding:1.5rem 1rem calc(1.5rem + env(safe-area-inset-b
 .invitation-quote{display:flex;min-height:0;gap:1.1rem;justify-content:center;width:min(100%,440px);padding:1rem 0 1.8rem;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;animation:none}
 .invitation-quote blockquote{position:relative;z-index:1;margin:0}
 .invitation-quote-writing{position:relative;z-index:1;display:flex;width:100%;flex-direction:column;gap:.05rem;color:#fff}
-.invitation-handwriting-line{display:block;width:100%;height:clamp(2.8rem,5vw,3.5rem);overflow:visible;color:#fff}
+.invitation-handwriting-line{display:block;width:100%;min-height:clamp(2.8rem,5vw,3.5rem);overflow:visible;color:#fff;font:italic 500 clamp(1.25rem,2.4vw,1.7rem)/1.45 Georgia,'Times New Roman',serif;letter-spacing:-.025em}
 .handwriting-fallback{display:block;min-height:clamp(2.8rem,5vw,3.5rem);color:#fff;font:italic 500 clamp(1.25rem,2.4vw,1.7rem)/1.45 Georgia,'Times New Roman',serif;letter-spacing:-.025em}
 .handwriting-loading{visibility:hidden}
 .invitation-quote figcaption{position:relative;z-index:1;display:block;margin:0;color:var(--sky);font:600 .82rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em}

@@ -132,10 +132,34 @@ function Activity({ activity, index }: { activity: SiteActivity; index: number }
   return <section id={activity.id} className={`act ${index % 2 ? 'flip activity-alt' : ''}`} style={{ '--c': activity.color } as React.CSSProperties} aria-labelledby={`${activity.id}-title`}>
     <div className="wrap grid"><div className="ph reveal"><img src={assetUrl(activity.image)} alt={activity.imageAlt} loading="lazy" /></div>
       <div className="activity-copy reveal"><div className="activity-meta"><span className="tag">{activity.tag}</span></div><h2 id={`${activity.id}-title`}>{activity.title}</h2><p className="activity-description">{activity.text}</p>
+        <dl className="activity-purpose-grid">
+          <div><dt>วัตถุประสงค์</dt><dd>{activity.purpose}</dd></div>
+          <div><dt>แนวทางดำเนินงาน</dt><dd>{activity.approach}</dd></div>
+          <div><dt>ประโยชน์ต่อชุมชน</dt><dd>{activity.benefit}</dd></div>
+        </dl>
         <div className="activity-outcome"><p className="activity-outcome-label">เมื่อจบกิจกรรม ผู้เรียนจะทำได้</p><p>{activity.outcome}</p></div>
         <dl>{activity.facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         {activity.topics.length > 0 && <div className="activity-timeline-wrap"><h3 className="activity-timeline-title">ตัวอย่างสิ่งที่สอน</h3><ol className="activity-timeline" aria-label="ตัวอย่างบทเรียนในกิจกรรม">{activity.topics.map((topic) => <li key={topic.title}><span className="activity-timeline-dot" aria-hidden="true" /><div><h4>{topic.title}</h4><p>{topic.description}</p></div></li>)}<li className="activity-timeline-next"><span className="activity-timeline-dot" aria-hidden="true" /><a className="activity-action" href={assetUrl('contact.html')}>สอบถามเรื่องกิจกรรม<span aria-hidden="true">↗</span></a></li></ol></div>}
       </div>
+    </div>
+  </section>;
+}
+
+function ParticipationSteps() {
+  return <section className="participation-section" aria-labelledby="participation-title">
+    <div className="wrap participation-content reveal">
+      <div className="participation-heading">
+        <p className="kicker">ขอบเขตการเข้าร่วมโครงการ</p>
+        <h2 id="participation-title">เริ่มต้นด้วยความเข้าใจของชุมชน</h2>
+        <p>ทั้งสองโครงการใช้กระบวนการร่วมกันตั้งแต่สำรวจความต้องการ จัดกิจกรรม จนถึงติดตามผล เพื่อให้ความรู้กลายเป็นคุณค่าที่ยั่งยืน</p>
+      </div>
+      <ol className="participation-steps">
+        {site.activities.map((activity, index) => <li key={activity.id}>
+          <span className="participation-project">โครงการ {index + 1}</span>
+          <h3>{activity.title}</h3>
+          <div className="participation-step-list">{activity.steps.map((step, stepIndex) => <div key={step.title}><span>{stepIndex + 1}</span><p><strong>{step.title}</strong>{step.description}</p></div>)}</div>
+        </li>)}
+      </ol>
     </div>
   </section>;
 }
@@ -255,6 +279,7 @@ function App() {
       </section>
       <ActivitiesIntro />
       {site.activities.map((activity, index) => <Activity key={activity.id} activity={activity} index={index} />)}
+      <ParticipationSteps />
       <section id="join" className="join-section"><div className="wrap join-card-wrap"><LearningInvitationCard eyebrow={site.name} title={site.join.title} description={site.join.text} actionLabel={site.join.actionLabel} href={assetUrl('contact.html')} quote={site.join.quote} attribution={site.join.attribution} /></div></section>
     </main>
     <footer>{site.footer}</footer>

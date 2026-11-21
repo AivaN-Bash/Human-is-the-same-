@@ -1,7 +1,3 @@
-import { useRef } from 'react';
-import { useInView } from 'motion/react';
-import { HandwritingSvg } from './handwriting-svg';
-
 export type LearningInvitationCardProps = {
   eyebrow: string;
   title: string;
@@ -22,9 +18,6 @@ export function LearningInvitationCard({
   quote,
   attribution,
 }: LearningInvitationCardProps) {
-  const quoteRef = useRef<HTMLElement>(null);
-  const quoteIsVisible = useInView(quoteRef, { amount: 0.3 });
-
   return (
     <article className="invitation-card" aria-labelledby="invitation-card-title">
       <div className="invitation-card-copy">
@@ -36,13 +29,16 @@ export function LearningInvitationCard({
         </a>
       </div>
 
-      <figure ref={quoteRef} className="invitation-quote" aria-label={`Quote by ${attribution}`}>
+      <figure className="invitation-quote" aria-label={`Quote by ${attribution}`}>
         <blockquote>
-          <span className="sr-only">{quote}</span>
-          <div className="invitation-quote-writing" aria-hidden="true">
-            {['Education is the most', 'powerful weapon which', 'you can use to change', 'the world.'].map((line, index) => (
-              <HandwritingSvg key={line} text={line} className="invitation-handwriting-line" delay={0.12 + index * 0.82} duration={1} active={quoteIsVisible} />
-            ))}
+          <div className="invitation-quote-writing">
+            {quote.split(' ').reduce<string[]>((lines, word) => {
+              const lineIndex = lines.length - 1;
+              if (lineIndex < 0) return [word];
+              if (lines[lineIndex].length + word.length > 25) return [...lines, word];
+              lines[lineIndex] = `${lines[lineIndex]} ${word}`;
+              return lines;
+            }, []).map((line) => <span className="invitation-handwriting-line" key={line}>{line}</span>)}
           </div>
         </blockquote>
         <figcaption>— {attribution}</figcaption>
