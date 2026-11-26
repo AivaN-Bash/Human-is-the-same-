@@ -1217,3 +1217,37 @@ footer{background:#e8e7ed}
   .participation-steps>li{padding:1.4rem 1.2rem}
   .participation-steps>li+li{border-top:1px solid rgba(83,72,54,.18);border-left:0}
 }
+
+/* Smoother local interactions: readable type, interruptible menu, quieter press states. */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html.menu-open,html.menu-open body{overflow:hidden}
+.nav{display:block;visibility:hidden;pointer-events:none;transition:visibility 0s linear 360ms}
+.nav.is-open{visibility:visible;pointer-events:auto;transition-delay:0s}
+.overlay{opacity:0;animation:none;transition:opacity 220ms ease-out}
+.nav.is-open .overlay{opacity:1}
+.layer{transform:translate3d(104%,0,0);animation:none;transition:transform 360ms cubic-bezier(.22,1,.36,1)}
+.nav.is-open .layer{transform:translate3d(0,0,0)}
+.nav.is-open .l2{transition-delay:40ms}
+.nav.is-open .l3{transition-delay:80ms}
+.nav:not(.is-open) .l2,.nav:not(.is-open) .l3{transition-delay:0ms}
+.nav .menu-list a{opacity:0;transform:translateY(14px);animation:none;transition:opacity 240ms ease-out,transform 320ms cubic-bezier(.22,1,.36,1),color 160ms ease-out}
+.nav.is-open .menu-list a{opacity:1;transform:translateY(0);transition-delay:calc(90ms + var(--item) * 40ms)}
+.nav:not(.is-open) .menu-list a{transition-delay:0ms}
+.activities-intro .marker-heading{color:#2f3e57}
+.marker-heading .marker-highlight:before{background:color-mix(in srgb,var(--marker-color) 22%,#fbf8f0)}
+.btn,.invitation-action,.contact-submit,.origin-link,.contact-email,.contact-back,.pill,.menu-btn{
+  transition-property:transform,background-color,box-shadow,border-color,color;
+  transition-duration:180ms;
+  transition-timing-function:cubic-bezier(.2,0,0,1);
+}
+.btn:hover{transform:translateY(-1px)}
+.hero-title .btn:hover .btn-arrow{transform:translateY(2px)}
+.invitation-action:hover,.contact-submit:hover,.origin-link:hover,.contact-email:hover{transform:translateY(-1px)}
+.btn:active,.invitation-action:active,.contact-submit:active,.origin-link:active,.contact-email:active,.pill:active,.menu-btn:active{transform:scale(.96)}
+.contact-field input,.contact-field select,.contact-field textarea{transition:border-color 160ms ease-out,box-shadow 160ms ease-out}
+@media(hover:hover) and (pointer:fine){
+  .book-spread:hover{transform:none;box-shadow:0 1px 0 #cfc2ae,0 3px 0 #eee7db,0 16px 34px rgba(57,48,38,.14)}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav,.overlay,.layer,.nav .menu-list a,.btn,.invitation-action,.contact-submit,.origin-link,.contact-email,.pill,.menu-btn{transition:none}
+}

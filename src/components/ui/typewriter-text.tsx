@@ -7,6 +7,8 @@ type TypewriterTextProps = {
   deletingSpeed?: number;
   holdDuration?: number;
   restartDelay?: number;
+  /** When false, the line types once and stays readable. */
+  loop?: boolean;
 };
 
 type TypewriterPhase = 'typing' | 'holding' | 'deleting' | 'restarting';
@@ -18,6 +20,7 @@ export function TypewriterText({
   deletingSpeed = 55,
   holdDuration = 1500,
   restartDelay = 450,
+  loop = true,
 }: TypewriterTextProps) {
   const reducedMotion = useReducedMotion();
   const textRef = useRef<HTMLSpanElement>(null);
@@ -33,7 +36,7 @@ export function TypewriterText({
   const [phase, setPhase] = useState<TypewriterPhase>('typing');
 
   useEffect(() => {
-    if (reducedMotion || !isInView) return;
+    if (reducedMotion || !isInView || (!loop && phase === 'holding')) return;
 
     const delay = phase === 'typing'
       ? typingSpeed
@@ -60,7 +63,7 @@ export function TypewriterText({
     }, delay);
 
     return () => window.clearTimeout(timeoutId);
-  }, [characters.length, deletingSpeed, holdDuration, isInView, phase, reducedMotion, restartDelay, typingSpeed, visibleCount]);
+  }, [characters.length, deletingSpeed, holdDuration, isInView, loop, phase, reducedMotion, restartDelay, typingSpeed, visibleCount]);
 
   if (reducedMotion) return <span className="typewriter-text">{text}</span>;
 

@@ -103,7 +103,7 @@ function Hero() {
         <div data-layer="3" className="hero-title">
           <span className="chip-top">{site.hero.eyebrow}</span>
           <h1 id="h1" className="hero-title-text" data-reserve={site.hero.title}>
-            <TypewriterText text={site.hero.title} typingSpeed={82} deletingSpeed={34} holdDuration={2400} restartDelay={320} />
+            <TypewriterText text={site.hero.title} typingSpeed={72} loop={false} />
           </h1>
           <p className="sub">{site.hero.subtitle}</p>
           <a className="btn go" href="#activities-intro">
@@ -250,6 +250,11 @@ function App() {
   const [readProgress, setReadProgress] = useState(0);
 
   useEffect(() => {
+    document.documentElement.classList.toggle('menu-open', menuOpen);
+    return () => document.documentElement.classList.remove('menu-open');
+  }, [menuOpen]);
+
+  useEffect(() => {
     document.title = `${site.name} | ${site.hero.eyebrow}`;
     let revealObserver: IntersectionObserver | undefined;
     const revealElements = [...document.querySelectorAll('.reveal')];
@@ -304,7 +309,7 @@ function App() {
     <main>
       <section id="about" className="about-section">
         <div className="about-ambient" aria-hidden="true"><img className="about-photo" src={assetUrl('/images/school.jpg')} alt=""/><span className="ambient-orb ambient-orb-blue"/><span className="ambient-orb ambient-orb-red"/><span className="ambient-grain"/></div>
-        <div className="wrap reveal about-content"><div className="about-heading"><p className="kicker">{site.about.label}</p><h2><TypewriterText text={site.about.title} /></h2><p className="lead">{site.about.text}</p><AnimatedTextRoller lead="เราเชื่อว่า" phrases={site.about.movingPhrases} /></div>
+        <div className="wrap reveal about-content"><div className="about-heading"><p className="kicker">{site.about.label}</p><h2>{site.about.title}</h2><p className="lead">{site.about.text}</p><AnimatedTextRoller lead="เราเชื่อว่า" phrases={site.about.movingPhrases} /></div>
           <ul className="about-details">{site.about.details.map((detail) => <li key={detail.title}><span className="about-detail-icon"><AboutIcon name={detail.icon} /></span><div><h3>{detail.title}</h3><p>{detail.text}</p></div></li>)}</ul>
         </div>
       </section>
